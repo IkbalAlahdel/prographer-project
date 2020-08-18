@@ -15,7 +15,31 @@ $(window).on('load', function() {
 	$(".loader").fadeOut();
 	$("#preloder").delay(400).fadeOut("slow");
 
-	
+		/*------------------
+		Masonry
+	--------------------*/
+	var $container = $('.gallery-warp');
+		$container.imagesLoaded().progress( function() {
+			$container.isotope({
+				masonry: {
+					columnWidth: '.grid-sizer',
+  					itemSelector: '.gallery-item'
+				}
+			});
+		});
+
+	$('.gallery-filter li').on("click", function(){
+		$(".gallery-filter li").removeClass("active");
+		$(this).addClass("active");
+		var selector = $(this).attr('data-filter');
+		$container.imagesLoaded().progress( function() {
+			$container.isotope({
+				filter: selector,
+			});
+		});
+		return false;
+	});
+
 
 
 });
